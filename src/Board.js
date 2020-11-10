@@ -90,7 +90,7 @@
           oneCount += 1;
         }
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any rows on this board contain conflicts
@@ -102,7 +102,7 @@
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -112,6 +112,9 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
+
+      // what do we want to call this.get() on?
+
       return false; // fixme
     },
 
