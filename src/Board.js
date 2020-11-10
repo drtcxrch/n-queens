@@ -61,8 +61,7 @@
       );
     },
 
-
-/*
+    /*
          _             _     _
      ___| |_ __ _ _ __| |_  | |__   ___ _ __ ___ _
     / __| __/ _` | '__| __| | '_ \ / _ \ '__/ _ (_)
@@ -79,11 +78,30 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
+      var rowArr = this.get(rowIndex);
+      console.log(rowArr);
+      var oneCount = 0;
+
+      for (var i = 0; i < rowArr.length; i++) {
+        if (oneCount > 1) {
+          return true;
+        }
+        if (rowArr[i] === 1) {
+          oneCount += 1;
+        }
+      }
       return false; // fixme
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
+      var n = this.get('n');
+      console.log(n);
+      for (var i = 0; i < n; i++) {
+        if (this.hasRowConflictAt(i) === true) {
+          return true;
+        }
+      }
       return false; // fixme
     },
 
