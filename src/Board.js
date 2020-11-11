@@ -139,7 +139,7 @@
       return false;
     },
 
-
+    // Complete board through col conflicts
 
     // Major Diagonals - go from top-left to bottom-right
     // --------------------------------------------------------------
