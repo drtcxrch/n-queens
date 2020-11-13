@@ -29,11 +29,14 @@
       this.trigger('change');
     },
 
-    _getFirstRowColumnIndexForMajorDiagonalOn: function(rowIndex, colIndex) {
+    _getFirstRowColumnIndexForMajorDiagonalOn:
+    function(rowIndex, colIndex) {
+      console.log('Major:', rowIndex, colIndex);
       return colIndex - rowIndex;
     },
 
     _getFirstRowColumnIndexForMinorDiagonalOn: function(rowIndex, colIndex) {
+      console.log('Minor:', rowIndex, colIndex);
       return colIndex + rowIndex;
     },
 
@@ -42,6 +45,7 @@
     },
 
     hasAnyQueenConflictsOn: function(rowIndex, colIndex) {
+
       return (
         this.hasRowConflictAt(rowIndex) ||
         this.hasColConflictAt(colIndex) ||
@@ -216,44 +220,28 @@
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
 
       var oneCount = 0;
-      var colIndex = minorDiagonalColumnIndexAtFirstRow;
+      var colIndex, startingRow;
       var n = this.get('n');
 
-      if (minorDiagonalColumnIndexAtFirstRow === (n - 1)) {
-        var lastRow = 0;
-        while (lastRow < n) {
-          oneCount = 0;
-          colIndex = minorDiagonalColumnIndexAtFirstRow;
-          for (var currentRow = lastRow; currentRow < n; currentRow++) {
-            // console.log(currentRow);
-            var currentRowArr = this.get(currentRow);
-            // console.log(JSON.stringify(currentRowArr));
-            if (currentRowArr[colIndex] === 1) {
-              oneCount++;
-              if (oneCount > 1) {
-                return true;
-              }
-            }
-            colIndex--;
-          }
-          lastRow++;
-        }
+      if (minorDiagonalColumnIndexAtFirstRow >= n) {
+        startingRow = minorDiagonalColumnIndexAtFirstRow - ( n - 1);
+        colIndex = n - 1;
       } else {
-        for (var currentRow = 0; currentRow < n; currentRow++) {
-          // console.log('currentRow', currentRow);
-          var rowArr = this.get(currentRow);
-          console.log(currentRow);
-          console.log(JSON.stringify(rowArr));
-          var testing123 = rowArr[colIndex];
-          console.log('rowArr[colIndex]', testing123);
-          if (testing123 === 1) {
-            oneCount++;
-            if (oneCount > 1) {
-              return true;
-            }
+        startingRow = 0;
+        colIndex = minorDiagonalColumnIndexAtFirstRow;
+      }
+
+      for (var currentRow = startingRow; currentRow < n; currentRow++) {
+
+        var rowArr = this.get(currentRow);
+
+        if (rowArr[colIndex] === 1) {
+          oneCount++;
+          if (oneCount > 1) {
+            return true;
           }
-          colIndex--;
         }
+        colIndex--;
       }
 
       return false;
@@ -263,7 +251,7 @@
     hasAnyMinorDiagonalConflicts: function() {
 
       var n = this.get('n');
-      for (var i = 0; i < n; i++) {
+      for (var i = 0; i < ( n + ( n - 1)); i++) {
         if (this.hasMinorDiagonalConflictAt(i) === true) {
           return true;
         }
