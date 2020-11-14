@@ -31,12 +31,10 @@
 
     _getFirstRowColumnIndexForMajorDiagonalOn:
     function(rowIndex, colIndex) {
-      console.log('Major:', rowIndex, colIndex);
       return colIndex - rowIndex;
     },
 
     _getFirstRowColumnIndexForMinorDiagonalOn: function(rowIndex, colIndex) {
-      console.log('Minor:', rowIndex, colIndex);
       return colIndex + rowIndex;
     },
 
