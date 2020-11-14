@@ -92,6 +92,8 @@
         }
       }
       return false;
+
+      //linear time because we loop through n.
     },
 
     // test if any rows on this board contain conflicts
@@ -103,6 +105,7 @@
         }
       }
       return false;
+      //exponential time because we loop through n rows and loop through n columns for each row.
     },
 
 
@@ -126,6 +129,7 @@
         }
       }
       return false;
+      //linear because we loop through n rows.
     },
 
     // test if any columns on this board contain conflicts
@@ -139,6 +143,7 @@
         }
       }
       return false;
+      //exponential because we loop through n columns and n rows.
     },
 
     // Complete board through col conflicts
@@ -159,33 +164,6 @@
         colIndex = majorDiagonalColumnIndexAtFirstRow;
         startingRow = 0;
       }
-      // if (colIndex === 0) {
-      //   var rowIterator = 0;
-
-      //   while (rowIterator < n) {
-      //     colIndex = majorDiagonalColumnIndexAtFirstRow;
-      //     oneCount = 0;
-      //     for (var rowIndex = rowIterator; rowIndex < n; rowIndex++) {
-      //       var currentRowArr = this.get(rowIndex);
-
-      //       if (currentRowArr[colIndex] === 1) {
-      //         oneCount++;
-      //       }
-      //       colIndex++;
-
-      //       if (oneCount > 1) {
-      //         return true;
-      //       }
-
-      //       if (colIndex === n || (rowIndex + 1 === n)) {
-      //         rowIndex = n;
-      //         rowIterator++;
-      //       }
-      //     }
-      //   }
-
-      //   return false;
-      // }
 
       for (var rowIndex = startingRow; rowIndex < n; rowIndex++) {
         var currentRowArr = this.get(rowIndex);
@@ -203,6 +181,7 @@
           return false;
         }
       }
+      //best case constant, worst cases linear.
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -214,7 +193,7 @@
         }
       }
       return false;
-
+      //linear time
     },
 
 
@@ -251,6 +230,7 @@
       }
 
       return false;
+      //linear worst case, constant best case.
     },
 
     // test if any minor diagonals on this board contain conflicts
@@ -263,6 +243,7 @@
         }
       }
       return false;
+      //linear
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
