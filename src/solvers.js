@@ -30,8 +30,28 @@ window.findNRooksSolution = function(n) {
 
 // return the number of nxn chessboards that exist, with n rooks placed such that none of them can attack each other
 window.countNRooksSolutions = function(n) {
-  var solutionCount = undefined; //fixme
-  //do we need to call findNRooksSolution in this function and is there any good reason to do so? It might be easier to just iterate find all possible solutions from all starting points on the board.
+  var solutionCount = 0;
+  var board = new Board({n: n});
+
+  // nested function
+  // input : position - rowIndex
+  var testForSolutions = function(rowIndex) {
+
+    // base case
+    if (rowIndex === n) {
+      solutionCount++;
+      return;
+    }
+    for (var i = 0; i < n; i++) {
+      board.togglePiece(rowIndex, i);
+      if (!board.hasAnyRooksConflicts()) {
+        testForSolutions(rowIndex + 1);
+      }
+      board.togglePiece(rowIndex, i);
+    }
+  };
+  testForSolutions(0);
+
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
   return solutionCount;
 };
